@@ -60,9 +60,36 @@ void test_bfs(int num_arguments, char** argument_array) {
   std::vector<std::string> tag_vect;
   gunrock::io::cli::parse_tag_string(params.tag_string, &tag_vect);
 
+
+  // add the source vector manually
+  std::cout << "vertices:" << G.get_number_of_vertices() << std::endl;
+  std::vector<std::pair<uint64_t, int>> degree_vertex_pairs(G.get_number_of_vertices());
+  std::cout << "degree_vertex_pairs.size(): " << degree_vertex_pairs.size() << std::endl;
+  // degree_vertex_pairs.reserve(G.get_number_of_vertices());
+  for (int v = 0; v < G.get_number_of_vertices(); ++v){
+    uint64_t num_neighbors = G.get_number_of_neighbors(v);
+    // std::cout << "v: " << v << ", neigh: " << num_neighbors << std::endl;
+    // degree_vertex_pairs.push_back(std::make_pair(num_neighbors, v));
+  }
+  
+  // // Sort the vector based on degree in descending order
+  // std::sort(degree_vertex_pairs.begin(), degree_vertex_pairs.end(), 
+  //         [](const std::pair<uint64_t, int>& a, const std::pair<uint64_t, int>& b) {
+  //             return a.first < b.first;
+  //         });
+  
+  // // Vector to store the first n largest degree nodes
+  // source_vect.clear();
+  // // Extract the first n largest degree nodes
+  // for (int i = 0; i < 100 && i < degree_vertex_pairs.size(); i++) {
+  //     source_vect.push_back(degree_vertex_pairs[i].second);
+  // }
+  // for (int i = 0; i < source_vect.size(); i++) {
+  //   printf("source_vect[%d] = %d\n", i, source_vect[i]);
+  // }
+  
   // --
   // Run problem
-
   size_t n_runs = source_vect.size();
   std::vector<float> run_times;
 
