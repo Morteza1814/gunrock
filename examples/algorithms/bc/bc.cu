@@ -82,8 +82,16 @@ void test_bc(int num_arguments, char** argument_array) {
 
   std::cout << "Single source : " << source_vect.back() << "\n";
   print::head(bc_values, 40, "GPU bc values");
-  std::cout << "GPU Elapsed Time : " << run_times[params.num_runs - 1]
-            << " (ms)" << std::endl;
+  // std::cout << "GPU Elapsed Time : " << run_times[params.num_runs - 1]
+  //           << " (ms)" << std::endl;
+  float total_time = 0;
+  for (int i = 0; i < params.num_runs; i++) {
+    std::cout << "Run " << i << " Exec Time: " << run_times[i] << " (ms)" << std::endl;
+    //get the average time
+    total_time += run_times[i];
+  }
+  std::cout << "Average GPU Elapsed Time : " << (float)(total_time/params.num_runs) << " (ms)"
+            << std::endl;
 }
 
 int main(int argc, char** argv) {

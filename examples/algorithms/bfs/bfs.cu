@@ -266,11 +266,19 @@ void test_bfs(int num_arguments, char** argument_array) {
         params.filename, "market", params.json_dir, params.json_file,
         source_vect, tag_vect, num_arguments, argument_array);
   }
-
+  
   // Print info for last run
-  std::cout << "Source : " << source_vect.back() << "\n";
+  // std::cout << "Source : " << source_vect.back() << "\n";
   print::head(distances, 40, "GPU distances");
-  std::cout << "GPU Elapsed Time : " << run_times[n_runs - 1] << " (ms)"
+  // std::cout << "GPU Elapsed Time : " << run_times[n_runs - 1] << " (ms)"
+  //           << std::endl;
+  float total_time = 0;
+  for (int i = 0; i < n_runs; i++) {
+    std::cout << "Run " << i << " Exec Time: " << run_times[i] << " (ms)" << std::endl;
+    //get the average time
+    total_time += run_times[i];
+  }
+  std::cout << "Average GPU Elapsed Time : " << (float)(total_time/n_runs) << " (ms)"
             << std::endl;
 
   // --
